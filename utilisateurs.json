@@ -1,0 +1,38 @@
+[
+  {
+    "email": "toto@gmail.com",
+    "mdp":"toto",
+    "naissance": "video",
+    "taille": "Rhiab Benhamouda",
+    "poids":0,
+	"ville":"Nice",
+	"nomrue":"Latouche",
+	"cdp":06200,
+	"numvoie":25,
+	"typevoie":"Rue"
+},
+  {
+    "email": "titi@gmail.com",
+    "mdp":"titi",
+    "naissance": "video",
+    "taille": "Rhiab Benhamouda",
+    "poids":0,
+	"ville":"Nice",
+	"nomrue":"Latouche",
+	"cdp":06200,
+	"numvoie":25,
+	"typevoie":"Rue"
+  },
+  {
+   "email": "tintin@gmail.com",
+    "mdp":"tintin",
+    "naissance": "video",
+    "taille": "Rhiab Benhamouda",
+    "poids":0,
+	"ville":"Nice",
+	"nomrue":"Latouche",
+	"cdp":06200,
+	"numvoie":25,
+	"typevoie":"Rue"
+  }
+]
