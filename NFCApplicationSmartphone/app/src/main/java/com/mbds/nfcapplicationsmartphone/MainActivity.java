@@ -8,21 +8,20 @@ import android.widget.Button;
 import android.widget.RadioButton;
 
 public class MainActivity extends AppCompatActivity {
-Button btnLog ;
+Button btnEnvoie;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-        btnLog= (Button) findViewById(R.id.boutonLog);
+        btnEnvoie= (Button) findViewById(R.id.envoi);
 
-        btnLog.setOnClickListener(new View.OnClickListener() {
+        btnEnvoie.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ConnectionActivity.class);
-                startActivityForResult(intent, 1);
+
             }
         });
 
