@@ -98,6 +98,8 @@ exports.postUtilisateur = function(formData, callback) {
 	    if(!err) {
 	 
 			let toInsert = {
+			    nom:formData.nom,
+                prenom:formData.prenom,
 				email : formData.email, 
                 mdp : formData.mdp,
                 dateNaissance:formData.dateNaissance,
@@ -165,8 +167,10 @@ exports.getUtilisateur = function(body, callback) {
 exports.putUtilisateur = function(body, callback) {
     MongoClient.connect(url, function(err, db) {
         if(!err) {
-            var myquery = { "_id": ObjectId(body.id)};
+            var myquery = { "_id": ObjectId(body._id)};
             var newvalues = {
+                nom:body.nom,
+                prenom:body.prenom,
                 email : body.email, 
                 mdp : body.mdp,
                 dateNaissance:body.dateNaissance,

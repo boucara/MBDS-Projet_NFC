@@ -74,7 +74,7 @@ app.post('/api/utilisateur', function(req, res) {
         var objdData = {
             msg:"succes",
             data: data
-        }
+        };
         res.send(JSON.stringify(objdData));
     });
 });
