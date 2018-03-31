@@ -14,13 +14,13 @@ exports.connexionMongo = function(callback) {
 exports.putSiege = function(body, callback) {
     MongoClient.connect(url, function(err, db) {
         if(!err) {
-            var myquery = { "_id": ObjectId(body.id)};
+            var myquery = { "_id": ObjectId(body._id)};
             var newvalues = {
                 numSerie : body.numSerie, 
                 transport : body.transport,
                 compagnie:body.compagnie,
                 etat:body.etat,
-                utilisateurs:body.utilisateurs
+                utilisateurs:body.utilisateurs?body.utilisateurs:[]
             };
             db.collection("sieges")
                 .updateOne(myquery, newvalues, function(err, result) {
@@ -188,7 +188,7 @@ exports.putUtilisateur = function(body, callback) {
 					cMusique:body.cMusique,
 					cVideo:body.cVideo
 				},
-				historique:body.historique
+				historique:body.historique?body.historique:[]
             };
             db.collection("utilisateurs")
                 .updateOne(myquery, newvalues, function(err, result) {
