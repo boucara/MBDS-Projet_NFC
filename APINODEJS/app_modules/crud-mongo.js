@@ -107,7 +107,13 @@ exports.postUtilisateur = function(formData, callback) {
 				adresse:{ville:formData.ville,
 						 codePostal:formData.codePostal,
 						 numVoie:formData.numVoie,
-						 typeVoie:formData.typeVoie}
+						 typeVoie:formData.typeVoie},
+				preference:{
+					inclinaison:120,
+					temperature:24,
+					luminosite:50
+				},
+				historique:[]
 			};
 			console.dir(JSON.stringify(toInsert));
 		    db.collection("utilisateurs")
@@ -170,7 +176,15 @@ exports.putUtilisateur = function(body, callback) {
 				adresse:{ville:body.ville,
 						 codePostal:body.codePostal,
 						 numVoie:body.numVoie,
-						 typeVoie:body.typeVoie}
+						 typeVoie:body.typeVoie},
+				preference:{
+					inclinaison:body.inclinaison,
+					temperature:body.temperature,
+					luminosite:body.luminosite,
+					cMusique:body.cMusique,
+					cVideo:body.cVideo
+				},
+				historique:body.historique
             };
             db.collection("utilisateurs")
                 .updateOne(myquery, newvalues, function(err, result) {
