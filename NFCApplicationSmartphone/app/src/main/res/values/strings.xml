@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NFCApplicationSmartphone</string>
+    <string name="radio_femme">Femmme</string>
+    <string name="radio_homme">Homme</string>
 </resources>

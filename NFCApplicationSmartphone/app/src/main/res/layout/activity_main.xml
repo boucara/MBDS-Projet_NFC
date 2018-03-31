@@ -12,118 +12,237 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:text="Inscrivez vous!"
-        android:textColor="@color/colorPrimary"/>
+        android:textColor="@color/colorPrimary"
+        android:layout_gravity="center"/>
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Nom*:"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/EditTextNom"
         android:layout_height="wrap_content"
-        android:hint="Nom"
         android:inputType="textPersonName"
         android:textSize="15dp"
-        android:layout_width="fill_parent">
-    </EditText>
+        android:layout_width="match_parent"
+        android:background="@drawable/border"
+        android:textCursorDrawable="@drawable/color_cursor"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prenom*:"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/EditTextPrenom"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:textSize="15dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/border"
+        android:textCursorDrawable="@drawable/color_cursor"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date de Naissance*:"
+        android:textStyle="bold"/>
     <EditText
         android:id="@+id/EditTextDns"
         android:layout_height="wrap_content"
-        android:hint="Date de Naissance"
         android:inputType="date"
         android:textSize="15dp"
-        android:layout_width="fill_parent">
-    </EditText>
+        android:layout_width="match_parent"
+        android:background="@drawable/border"
+        android:textCursorDrawable="@drawable/color_cursor"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email*:"
+        android:textStyle="bold"/>
     <EditText
         android:id="@+id/EditTextEmail"
         android:layout_height="wrap_content"
-        android:hint="Email"
         android:inputType="textEmailAddress"
-        android:layout_width="fill_parent"
-        android:textSize="15dp">
-    </EditText>
+        android:layout_width="match_parent"
+        android:textSize="15dp"
+        android:background="@drawable/border"
+        android:textCursorDrawable="@drawable/color_cursor"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mot de passe*:"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/EditTextMdp"
         android:layout_height="wrap_content"
-        android:hint="Mot de passe"
         android:inputType="textPassword"
-        android:layout_width="fill_parent"
-        android:textSize="15dp">
-    </EditText>
-    <EditText
-        android:id="@+id/EditTextTaille"
-        android:layout_height="wrap_content"
-        android:hint="Taille"
-        android:inputType="number"
-        android:layout_width="fill_parent"
-        android:textSize="15dp">
-    </EditText>
-    <EditText
-        android:id="@+id/EditTextPoids"
-        android:layout_height="wrap_content"
-        android:hint="Poids"
-        android:inputType="number"
-        android:layout_width="fill_parent"
-        android:textSize="15dp">
-    </EditText>
-    <TextView
+        android:layout_width="match_parent"
+        android:textSize="15dp"
+        android:background="@drawable/border"
+        android:textCursorDrawable="@drawable/color_cursor"/>
+    <RadioGroup
+        android:id="@+id/radioAlerte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <RadioButton
+        android:id="@+id/radioFemme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adresse"
-        android:textColor="@color/colorPrimary"
-        />
+        android:text="@string/radio_femme"
+        android:checked="true"
+        android:buttonTint="@color/my_color"/>
+
+
+    <RadioButton
+        android:id="@+id/radioHomme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio_homme"
+        android:buttonTint="@color/my_color"/>
+    </RadioGroup>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <EditText
-            android:id="@+id/EditTextNomVoie"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Nom de la voie"
-            android:inputType="text"
-            android:textSize="15dp"
-            android:layout_width="wrap_content">
-        </EditText>
-        <EditText
-            android:id="@+id/EditTextVille"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Taille:"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/EditTextTaille"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_width="100dp"
+                android:textSize="15dp"
+                android:background="@drawable/border"
+                android:textCursorDrawable="@drawable/color_cursor"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Ville"
-            android:inputType="text"
-            android:textSize="15dp"
-            android:layout_width="wrap_content">
-        </EditText>
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Poids:"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
+            <EditText
+                android:id="@+id/EditTextPoids"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_width="100dp"
+                android:textSize="15dp"
+                android:background="@drawable/border"
+                android:layout_marginLeft="10dp"
+                android:textCursorDrawable="@drawable/color_cursor"/>
+
+        </LinearLayout>
 
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <EditText
-            android:id="@+id/EditTextCP"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Code postal"
-            android:inputType="number"
-            android:textSize="15dp"
-            android:layout_width="wrap_content">
-        </EditText>
-        <EditText
-            android:id="@+id/EditTextNV"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ville:"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/EditTextVille"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textSize="15dp"
+                android:layout_width="100dp"
+                android:background="@drawable/border"
+                android:textCursorDrawable="@drawable/color_cursor">
+            </EditText>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Numéro voie"
-            android:inputType="number"
-            android:textSize="15dp"
-            android:layout_width="wrap_content">
-        </EditText>
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Code Postal:"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
+            <EditText
+                android:id="@+id/EditTextCP"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textSize="15dp"
+                android:layout_width="100dp"
+                android:background="@drawable/border"
+                android:layout_marginLeft="10dp"
+                android:textCursorDrawable="@drawable/color_cursor"/>
+
+        </LinearLayout>
     </LinearLayout>
-    <EditText
-        android:id="@+id/EditTextTV"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint=" Type voie"
-        android:inputType="text"
-        android:textSize="15dp"
-        android:layout_width="wrap_content">
-    </EditText>
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Numéro voie:"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/EditTextNV"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textSize="15dp"
+                android:layout_width="100dp"
+                android:background="@drawable/border"
+                android:textCursorDrawable="@drawable/color_cursor"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type voie:"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
+            <EditText
+                android:id="@+id/EditTextTV"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textSize="15dp"
+                android:layout_width="100dp"
+                android:background="@drawable/border"
+                android:layout_marginLeft="10dp"
+                android:textCursorDrawable="@drawable/color_cursor"/>
+        </LinearLayout>
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -131,6 +250,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Envoyer"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Déja inscrit!"
+            android:textColor="@color/colorPrimary"/>
 
         <Button
             android:id="@+id/boutonLog"
