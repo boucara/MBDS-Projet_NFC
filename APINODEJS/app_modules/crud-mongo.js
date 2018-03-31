@@ -11,56 +11,18 @@ exports.connexionMongo = function(callback) {
     });
 };
 
-exports.checkURL = function(params, callback) {
-    MongoClient.connect(url, function(err, db) {
-        if(!err) {
-            // La requete mongoDB
-            db.collection("videos")
-                .find(params).toArray(function(err, data) {
-                    var reponse;
-
-                    if(!err){
-                        var result = data.length>0?true:false;
-                        reponse = {
-                            succes: true,
-                            result : result,
-                            error : null,
-                            msg:"Details de la vidéo envoyés"
-                        };
-                    } else{
-                        reponse = {
-                            succes: false,
-                            error : err,
-                            msg: "erreur lors du find"
-
-                        };
-                    }
-                    callback(reponse);
-                    db.close();
-                });
-        } else {
-            var reponse = reponse = {
-                succes: false,
-                error : err,
-                msg: "erreur de connexion à la base"
-            };
-            callback(reponse);
-        }
-    });
-};
-
-exports.updateVideo = function(body, callback) {
+exports.putSiege = function(body, callback) {
     MongoClient.connect(url, function(err, db) {
         if(!err) {
             var myquery = { "_id": ObjectId(body.id)};
             var newvalues = {
-                description : body.description,
-                titre : body.titre,
-                urlimg : body.urlimg,
-                url : body.url,
-                vote:body.vote
+                numSerie : body.numSerie, 
+                transport : body.transport,
+                compagnie:body.compagnie,
+                etat:body.etat,
+                utilisateurs:body.utilisateurs
             };
-            db.collection("videos")
+            db.collection("sieges")
                 .updateOne(myquery, newvalues, function(err, result) {
                     if(!err){
                         reponse = {
@@ -88,37 +50,19 @@ exports.updateVideo = function(body, callback) {
     });
 };
 
-exports.findVideos = function(page, pagesize, callback) {
-    MongoClient.connect(url, function(err, db) {
-        console.log("pagesize = " + pagesize);
-        console.log("page = " + page);
-        var selection ={};
-        if(!err){
-            db.collection('videos')
-                .find(selection)
-                .skip(page*pagesize)
-                .limit(pagesize)
-                .toArray()
-                .then(arr => callback(arr));
-        }
-        else{
-            callback(-1);
-        }
-    });
-};
-exports.createVideo = function(formData, callback) {
+exports.postSiege = function(formData, callback) {
 	MongoClient.connect(url, function(err, db) {
 	    if(!err) {
 	 
 			let toInsert = {
-				url : formData.url, 
-                description : formData.description,
-                titre:formData.titre,
-                urlimg:formData.urlimg,
-                vote:formData.vote
+				numSerie : formData.numSerie, 
+                transport : formData.transport,
+                compagnie:formData.compagnie,
+                etat:formData.etat,
+                utilisateurs:[]
 			};
 			console.dir(JSON.stringify(toInsert));
-		    db.collection("videos")
+		    db.collection("sieges")
 		    .insertOne(toInsert, function(err, result) {
 		    	let reponse;
 
@@ -149,11 +93,59 @@ exports.createVideo = function(formData, callback) {
 	});
 };
 
-exports.findVideo = function(params, callback) {
+exports.postUtilisateur = function(formData, callback) {
+	MongoClient.connect(url, function(err, db) {
+	    if(!err) {
+	 
+			let toInsert = {
+				email : formData.email, 
+                mdp : formData.mdp,
+                dateNaissance:formData.dateNaissance,
+                taille:formData.taille,
+                poids:formData.poids,
+				sexe:formData.sexe,
+				adresse:{ville:formData.ville,
+						 codePostal:formData.codePostal,
+						 numVoie:formData.numVoie,
+						 typeVoie:formData.typeVoie}
+			};
+			console.dir(JSON.stringify(toInsert));
+		    db.collection("utilisateurs")
+		    .insertOne(toInsert, function(err, result) {
+		    	let reponse;
+
+		        if(!err){
+		            reponse = {
+		                succes : true,
+		                result: result,
+		                error : null,
+		                msg: "Ajout réussi " + result
+		            };
+		        } else {
+		            reponse = {
+		                succes : false,
+		                error : err,
+		                msg: "Problème à l'insertion"
+		            };
+		        }
+		        callback(reponse);
+		    });
+		} else{
+			let reponse = reponse = {
+                    	succes: false,
+                        error : err,
+                        msg:"Problème lors de l'insertion, erreur de connexion."
+                    };
+            callback(reponse);
+		}
+	});
+};
+
+exports.getUtilisateur = function(body, callback) {
     MongoClient.connect(url, function(err, db) {
-        var selection ={_id: ObjectId(params.id)};
+        var selection ={email: body.email, mdp :body.mdp};
         if(!err){
-            db.collection('videos')
+            db.collection('utilisateurs')
                 .find(selection)
                 .toArray()
                 .then(arr => callback(arr[0]));
@@ -164,12 +156,56 @@ exports.findVideo = function(params, callback) {
     });
 };
 
-exports.deleteVideo = function(params, callback) {
+exports.putUtilisateur = function(body, callback) {
+    MongoClient.connect(url, function(err, db) {
+        if(!err) {
+            var myquery = { "_id": ObjectId(body.id)};
+            var newvalues = {
+                email : body.email, 
+                mdp : body.mdp,
+                dateNaissance:body.dateNaissance,
+                taille:body.taille,
+                poids:body.poids,
+				sexe:body.sexe,
+				adresse:{ville:body.ville,
+						 codePostal:body.codePostal,
+						 numVoie:body.numVoie,
+						 typeVoie:body.typeVoie}
+            };
+            db.collection("utilisateurs")
+                .updateOne(myquery, newvalues, function(err, result) {
+                    if(!err){
+                        reponse = {
+                            succes : true,
+                            result: result,
+                            msg: "Modification réussie " + result
+                        };
+                    } else {
+                        reponse = {
+                            succes : false,
+                            error : err,
+                            msg: "Problème à la modification"
+                        };
+                    }
+                    callback(reponse);
+                });
+        } else{
+            var reponse = reponse = {
+                succes: false,
+                error : err,
+                msg:"Problème lors de la modification, erreur de connexion."
+            };
+            callback(reponse);
+        }
+    });
+};
+
+exports.deleteUtilisateur = function(params, callback) {
     MongoClient.connect(url, function(err, db) {
         if(!err) {
             let myquery = { "_id": ObjectId(params.id)};
             let reponse;
-            db.collection("videos")
+            db.collection("utilisateurs")
                 .deleteOne(myquery, function(err, result) {
                     if(!err){
                         reponse = {

@@ -7,13 +7,7 @@ const server   = require('http').Server(app);
 const mongoDBModule = require('./app_modules/crud-mongo');
 // Pour les formulaires standards
 const bodyParser = require('body-parser');
-// pour les formulaires multiparts
-var multer = require('multer');
-var multerData = multer();
 
-// Cette ligne indique le répertoire qui contient
-// les fichiers statiques: html, css, js, images etc.
-app.use(express.static(path.join(__dirname, '../', 'angular_client/client-video/dist/')));
 // Paramètres standards du module bodyParser
 // qui sert à  récupérer des paramètres reçus
 // par ex, par l'envoi d'un formulaire "standard"
@@ -59,72 +53,65 @@ app.get('/api/connection', function(req, res) {
     });
 });
 
-// Rend la liste des vidéos
-app.get('/api/videos', function(req, res) {
-    // Si prÃ©sent on prend la valeur du param, sinon 1
-    var page = parseInt(req.query.page || 0);
-    // idem si present on prend la valeur, sinon 10
-    var pagesize = parseInt(req.query.pagesize || 10);
-     mongoDBModule.findVideos(page, pagesize,  function(data) {
+// Connexion utilisateur
+app.post('/api/connexion', function(req, res) {
+	
+     mongoDBModule.getUtilisateur(req.body,  function(data) {
          //console.log(data.JSON);
         var objdData = {
-            msg:"la liste des videos avec succes",
+            msg:"succes",
             data: data
         }
         res.send(JSON.stringify(objdData));
     });
 });
 
-// Met à jour la vidéo
-// rend un message de réussite si la mise à jour à réussie
-// un message d'erreur sinon
-app.put('/api/video', function (req, res) {
-    mongoDBModule.updateVideo(req.body, function (response) {
+// Inscription utilisateur
+app.post('/api/utilisateur', function(req, res) {
+	
+     mongoDBModule.postUtilisateur(req.body,  function(data) {
+         //console.log(data.JSON);
+        var objdData = {
+            msg:"succes",
+            data: data
+        }
+        res.send(JSON.stringify(objdData));
+    });
+});
+
+// Update Utilisateur
+app.put('/api/utilisateur', function (req, res) {
+    mongoDBModule.putUtilisateur(req.body, function (response) {
         res.send(JSON.stringify(response));
     });
 });
 
-// Check si l'url est déjà utilisé
-// rend true si l'url est pas déjà stoké
-app.get('/api/checkurl', function (req, res) {
-    mongoDBModule.checkURL(req.query, function (response) {
+// delete Utilisateur
+app.delete('/api/utilisateur/:id', function (req, res) {
+    mongoDBModule.deleteUtilisateur(req.params, function (response) {
         res.send(JSON.stringify(response));
     });
 });
 
-// ajoute une nouvelle vidéo en base de données
-/*app.post('/api/videos', function(req, res) {
-    mongoDBModule.createVideo(req.body, function(data) {
-        res.send(JSON.stringify(data));
-    });
-});*/app.post('/api/videos', multerData.fields([]), function(req, res) {
-    console.log("tedi");
- 	mongoDBModule.createVideo(req.body, function(data) {
-        
-        res.send(JSON.stringify(data)); 
-    });
-});
-
-//Retourne la video dont l'id en param
-app.get('/api/:id/video',function(req, res) {
-    mongoDBModule.findVideo(req.params, function(data) {
-        res.send(JSON.stringify(data));
+// activation siège
+app.post('/api/siege', function(req, res) {
+	
+     mongoDBModule.postSiege(req.body,  function(data) {
+         //console.log(data.JSON);
+        var objdData = {
+            msg:"succes",
+            data: data
+        }
+        res.send(JSON.stringify(objdData));
     });
 });
 
-//Retourne la video dont l'id en param
-app.delete('/api/video/:id',function(req, res) {
-    mongoDBModule.deleteVideo(req.params, function(data) {
-        res.send(JSON.stringify(data));
+// Update siège
+app.put('/api/siege', function (req, res) {
+    mongoDBModule.putSiege(req.body, function (response) {
+        res.send(JSON.stringify(response));
     });
 });
-
-// Retourne l'index de l'application cliente
-app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../', 'angular_client/client-video/dist/', 'index.html'));
-});
-// ajoute vidéo en base de données
-
 
 // Lance le serveur avec express
 server.listen(port);
