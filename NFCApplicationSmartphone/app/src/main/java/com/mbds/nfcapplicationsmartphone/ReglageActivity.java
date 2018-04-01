@@ -137,6 +137,11 @@ public class ReglageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ReglageActivity.this, AppareillageActivity.class);
+                intent.putExtra("lum", lum);
+                intent.putExtra("temp", temp);
+                intent.putExtra("inclinaison", incl);
+                intent.putExtra("cMusique", cm.getText().toString());
+                intent.putExtra("cVideo",cv.getText().toString());
                 startActivityForResult(intent, 1);
 
             }});
