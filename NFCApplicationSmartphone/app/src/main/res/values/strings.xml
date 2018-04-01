@@ -2,4 +2,13 @@
     <string name="app_name">NFCApplicationSmartphone</string>
     <string name="radio_femme">Femmme</string>
     <string name="radio_homme">Homme</string>
+    <string name="intro_message">
+        <![CDATA[
+
+
+            Approcher votre smartphone de la borne nfc du siège pour les associer.
+
+
+        ]]>
+    </string>
 </resources>
