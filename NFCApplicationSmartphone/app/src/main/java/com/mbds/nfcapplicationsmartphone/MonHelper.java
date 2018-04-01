@@ -165,7 +165,7 @@ public class MonHelper  extends SQLiteOpenHelper {
         values.put(COLUMN_NV, u.nv);
         values.put(COLUMN_TV, u.tv);
 
-        db.update(DATABASE_NAME, values, COLUMN_ID +" = "+u.id, null);
+        db.update(TABLE_Utilisateur, values, COLUMN_ID +" = "+u.id, null);
         db.close();
     }
     public void updatePreferences(Utilisateur u)

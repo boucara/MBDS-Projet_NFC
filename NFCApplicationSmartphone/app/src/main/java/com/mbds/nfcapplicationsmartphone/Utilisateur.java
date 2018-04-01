@@ -44,6 +44,23 @@ public class Utilisateur {
         this.tv=tv;
 
     }
+    public Utilisateur(int id, String nom,String prenom ,String date, String email, String mdp,int taille,int poids,String ville,
+                       int cp,String tv, int nv ){
+        this.id=id;
+        this.nom=nom;
+        this.prenom=prenom;
+        this.date=date;
+        this.email=email;
+        this.mdp=mdp;
+
+        this.taille=taille;
+        this.poids=poids;
+        this.ville=ville;
+        this.cp=cp;
+        this.nv=nv;
+        this.tv=tv;
+
+    }
     public Utilisateur(int id,int temp, int incl, int lm, String cm,String cv){
         this.id=id;
         this.temp=temp;
@@ -53,7 +70,7 @@ public class Utilisateur {
         this.cv=cv;
     }
     public Utilisateur(int id, String nom,String prenom ,String date, String email, String mdp,String sexe,int taille,int poids,String ville,
-                       int cp, int nv ,String tv,int temp, int incl, int lm, String cm,String cv){
+                       int cp, String tv,int nv ,int temp, int incl, int lm, String cm,String cv){
 
         this.id=id;
         this.nom=nom;

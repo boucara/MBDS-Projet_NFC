@@ -12,7 +12,7 @@ public class ReglageActivity extends AppCompatActivity {
     ImageView imgEdit;
     TextView nomText ;
     String nom,prenom,dns,mdp,ville,tv ,email;
-    int taille,nv,poids,cp;
+    int taille,nv,poids,cp,id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +22,7 @@ public class ReglageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         nomText.setText(intent.getStringExtra("nom"));
-
+        id=intent.getIntExtra("id",0);
         nom=intent.getStringExtra("nom");
         prenom=intent.getStringExtra("prenom");
         dns=intent.getStringExtra("dns");
@@ -52,6 +52,7 @@ public class ReglageActivity extends AppCompatActivity {
                 intent.putExtra("nv", nv);
                 intent.putExtra("tv", tv);
                 intent.putExtra("email", email);
+                intent.putExtra("id", id);
                 startActivityForResult(intent, 1);
 
             }

@@ -46,6 +46,7 @@ Button btnInscription , btnLog;
                         if(user.email.equalsIgnoreCase(email.getText().toString())&&user.mdp.equalsIgnoreCase(mdp.getText().toString())){
                             i=1;
                             Intent intent = new Intent(ConnectionActivity.this,ReglageActivity.class);
+                            intent.putExtra("id", user.id);
                             intent.putExtra("nom", user.nom);
                             intent.putExtra("prenom", user.prenom);
                             intent.putExtra("dns", user.date);
