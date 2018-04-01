@@ -1,0 +1,4 @@
+#Sun Apr 01 16:33:03 CEST 2018
+base.0=D\:\\Utilisateurs\\Tom\\Documents\\Projet\\MBDS-Projet_NFC\\ApplicationSiege\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\4
+path.0=classes.dex
+renamed.0=classes.dex

@@ -17,12 +17,15 @@
 package com.example.android.beamlargefiles;
 
 import android.app.Activity;
-import android.net.Uri;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+
+import static android.nfc.NdefRecord.createMime;
 
 /**
  * This class demonstrates how to use Beam to send files too large to transfer reliably via NFC.
@@ -40,7 +43,7 @@ import android.util.Log;
  * type. (If it's important that your application be used to open the file, you'll need to register
  * an intent-filter to watch for the appropriate MIME-type.)
  */
-public class BeamLargeFilesFragment extends Fragment implements NfcAdapter.CreateBeamUrisCallback {
+public class BeamLargeFilesFragment extends Fragment implements NfcAdapter.CreateNdefMessageCallback {
 
     private static final String TAG = "BeamLargeFilesFragment";
     /** Filename that is to be sent for this activity. Relative to /assets. */
@@ -69,7 +72,7 @@ public class BeamLargeFilesFragment extends Fragment implements NfcAdapter.Creat
         NfcAdapter nfc = NfcAdapter.getDefaultAdapter(a);
         if (nfc != null) {
             Log.w(TAG, "NFC available. Setting Beam Push URI callback");
-            nfc.setBeamPushUrisCallback(this, a);
+            nfc.setNdefPushMessageCallback(this, a);
         } else {
             Log.w(TAG, "NFC is not available");
         }
@@ -87,12 +90,14 @@ public class BeamLargeFilesFragment extends Fragment implements NfcAdapter.Creat
      */
     // BEGIN_INCLUDE(createBeamUris)
     @Override
-    public Uri[] createBeamUris(NfcEvent nfcEvent) {
-        Log.i(TAG, "Beam event in progress; createBeamUris() called.");
-        // Images are served using a content:// URI. See AssetProvider for implementation.
-        Uri photoUri = Uri.parse(CONTENT_BASE_URI + FILENAME);
-        Log.i(TAG, "Sending URI: " + photoUri);
-        return new Uri[] {photoUri};
+    public NdefMessage createNdefMessage(NfcEvent nfcEvent) {
+        Log.i(TAG, "Beam event in progress; createNdefMessage() called.");
+        String text = "test moi ça";
+        NdefMessage ndefMessage = new NdefMessage(
+                new NdefRecord[] { createMime(
+                        "application/com.example.android.beamlargefiles", text.getBytes())
+                });
+        return ndefMessage;
     }
     // END_INCLUDE(createBeamUris)
 }
