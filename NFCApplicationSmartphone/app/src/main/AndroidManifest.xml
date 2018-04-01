@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mbds.nfcapplicationsmartphone">
 
+    <!-- The NFC permission is required to use NfcAdapter. -->
+    <uses-permission android:name="android.permission.NFC" />
+    <!-- Inform app distribution channels that NFC is used, though not required. -->
+    <!-- (This step is optional, but recommended.) -->
+    <uses-feature android:name="android.hardware.nfc" android:required="false" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,7 +24,8 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".ReglageActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".AppareillageActivity"></activity>
     </application>
 
 </manifest>

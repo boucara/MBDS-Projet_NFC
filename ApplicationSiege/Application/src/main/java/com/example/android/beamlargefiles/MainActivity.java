@@ -59,18 +59,6 @@ public class MainActivity extends SampleActivityBase {
         transaction.commit();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        // Check to see that the Activity started due to an Android Beam
-        Intent intent = getIntent();
-        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
-            Parcelable[] ndefMessageArray = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
-            NdefMessage ndefMessage = (NdefMessage) ndefMessageArray[0];
-            sampleOutput.setText(new String(ndefMessage.getRecords()[0].getPayload()));
-            Toast.makeText(this, new String(ndefMessage.getRecords()[0].getPayload()), Toast.LENGTH_LONG).show();
-        }
-    }
 
     @Override
     protected void onNewIntent(Intent intent)
