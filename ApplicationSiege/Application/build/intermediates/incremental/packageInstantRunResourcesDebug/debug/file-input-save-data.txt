@@ -1,7 +1,0 @@
-#Internal package file, do not edit.
-#Sun Apr 01 19:21:38 CEST 2018
-0.baseType=DIRECTORY
-0.base=D\:\\Utilisateurs\\Tom\\Documents\\Projet\\MBDS-Projet_NFC\\ApplicationSiege\\Application\\build\\intermediates\\assets\\debug
-0.path=stargazer_droid.jpg
-0.set=ASSET
-count=1
