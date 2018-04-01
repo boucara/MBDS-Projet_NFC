@@ -79,28 +79,27 @@ public class MonHelper  extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public int addUtilisateur(int id, String nom,String prenom ,String date, String email, String mdp,String sexe,int taille,int poids,String ville,
-                           int cp, int nv ,String tv,int temp, int incl, int lm, String cm,String cv){
+    public int addUtilisateur( Utilisateur u){
         ContentValues content = new ContentValues();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_NOM, nom);
-        contentValues.put(COLUMN_PRENOM, prenom);
-        contentValues.put(COLUMN_DATE, date);
-        contentValues.put(COLUMN_MAIL, email);
-        contentValues.put(COLUMN_MDP, mdp);
-        contentValues.put(COLUMN_SEXE, sexe);
-        contentValues.put(COLUMN_TAILLE, taille);
-        contentValues.put(COLUMN_POIDS, poids);
-        contentValues.put(COLUMN_VILLE, ville);
-        contentValues.put(COLUMN_CP, cp);
-        contentValues.put(COLUMN_NV, nv);
-        contentValues.put(COLUMN_TV, tv);
+        contentValues.put(COLUMN_NOM, u.nom);
+        contentValues.put(COLUMN_PRENOM, u.prenom);
+        contentValues.put(COLUMN_DATE,  u.date);
+        contentValues.put(COLUMN_MAIL,  u.email);
+        contentValues.put(COLUMN_MDP,  u.mdp);
+        contentValues.put(COLUMN_SEXE,  u.sexe);
+        contentValues.put(COLUMN_TAILLE,  u.taille);
+        contentValues.put(COLUMN_POIDS,  u.poids);
+        contentValues.put(COLUMN_VILLE,  u.ville);
+        contentValues.put(COLUMN_CP,  u.cp);
+        contentValues.put(COLUMN_NV,  u.nv);
+        contentValues.put(COLUMN_TV,  u.tv);
 
-        contentValues.put(COLUMN_TEMP, temp);
-        contentValues.put(COLUMN_INCL, incl);
-        contentValues.put(COLUMN_LM, lm);
-        contentValues.put(COLUMN_CM, cm);
-        contentValues.put(COLUMN_CV, cv);
+        contentValues.put(COLUMN_TEMP,  u.temp);
+        contentValues.put(COLUMN_INCL,  u.incl);
+        contentValues.put(COLUMN_LM,  u.lm);
+        contentValues.put(COLUMN_CM,  u.cm);
+        contentValues.put(COLUMN_CV,  u.cv);
 
         SQLiteDatabase db = getWritableDatabase();
         return (int)db.insert(TABLE_Utilisateur, null, contentValues) ;
