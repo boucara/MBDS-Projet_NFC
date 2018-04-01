@@ -78,4 +78,28 @@ public class Utilisateur {
 
 
     }
+    public Utilisateur( String nom,String prenom ,String date, String email, String mdp,String sexe,int taille,int poids,String ville,
+                       int cp, String tv ,int nv,int temp, int incl, int lm, String cm,String cv){
+        this.nom=nom;
+        this.prenom=prenom;
+        this.date=date;
+        this.email=email;
+        this.mdp=mdp;
+        this.sexe=sexe;
+        this.taille=taille;
+        this.poids=poids;
+        this.ville=ville;
+        this.cp=cp;
+        this.nv=nv;
+        this.tv=tv;
+
+
+        this.temp=temp;
+        this.incl=incl;
+        this.lm=lm;
+        this.cm=cm;
+        this.cv=cv;
+
+
+    }
 }
