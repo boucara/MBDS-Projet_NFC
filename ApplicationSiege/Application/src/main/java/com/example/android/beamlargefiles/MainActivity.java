@@ -17,12 +17,17 @@
 
 package com.example.android.beamlargefiles;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.nfc.NdefMessage;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.widget.TextView;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.example.android.common.activities.SampleActivityBase;
 import com.example.android.common.logger.Log;
@@ -39,18 +44,46 @@ public class MainActivity extends SampleActivityBase {
     public static final String TAG = "MainActivity";
 
     public static final String FRAGTAG = "BeamLargeFilesFragment";
+    TextView sampleOutput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView sampleOutput = (TextView) findViewById(R.id.sample_output);
+        sampleOutput = (TextView) findViewById(R.id.sample_output);
         sampleOutput.setText(Html.fromHtml(getString(R.string.intro_message)));
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         BeamLargeFilesFragment fragment = new BeamLargeFilesFragment();
         transaction.add(fragment, FRAGTAG);
         transaction.commit();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Check to see that the Activity started due to an Android Beam
+        Intent intent = getIntent();
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
+            Parcelable[] ndefMessageArray = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+            NdefMessage ndefMessage = (NdefMessage) ndefMessageArray[0];
+            sampleOutput.setText(new String(ndefMessage.getRecords()[0].getPayload()));
+            Toast.makeText(this, new String(ndefMessage.getRecords()[0].getPayload()), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent)
+    {
+
+        super.onNewIntent(intent);
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
+            Parcelable[] ndefMessageArray = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+            NdefMessage ndefMessage = (NdefMessage) ndefMessageArray[0];
+            sampleOutput.setText(new String(ndefMessage.getRecords()[0].getPayload()));
+            Toast.makeText(this, new String(ndefMessage.getRecords()[0].getPayload()), Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override
