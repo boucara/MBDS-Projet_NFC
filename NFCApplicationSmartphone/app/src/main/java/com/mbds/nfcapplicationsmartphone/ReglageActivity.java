@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ public class ReglageActivity extends AppCompatActivity {
     TextView nomText ;
     String nom,prenom,dns,mdp,ville,tv ,email;
     int taille,nv,poids,cp,id;
+    Button modifier ,app;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,5 +59,22 @@ public class ReglageActivity extends AppCompatActivity {
 
             }
         });
+        modifier=(Button)findViewById(R.id.modifi);
+        modifier.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+            }});
+        app=(Button)findViewById(R.id.app);
+        app.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ReglageActivity.this, AppareillageActivity.class);
+                startActivityForResult(intent, 1);
+
+            }});
+
     }
 }
